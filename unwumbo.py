@@ -1,6 +1,7 @@
 import sys
 from string import punctuation
 import re
+import PyPDF2
 
 def main():
   
@@ -34,10 +35,34 @@ def main():
   most_relevant_sentences(words_dict, sentences, no_sentences)
 
 def get_file_input():
-  file_name = input("Enter the name of the file you want summarized:\n")
-  f = open(file_name, 'r')
-  text = f.read()
-  return text
+  while(True):
+    file_name = input("Enter the name of the file you want summarized:\n")
+    if file_name.endswith(".txt"):
+      f = open(file_name, 'r')
+      text = f.read()
+      return text
+
+    elif file_name.endswith(".pdf"):
+      pdf_file_obj = open(file_name, 'rb')
+
+      pdf_reader = PyPDF2.PdfFileReader(pdf_file_obj)
+
+      num_pages = pdf_reader.numPages
+      count = 0
+      text = ""
+
+      while count < num_pages:
+        page_obj = pdf_reader.getPage(count)
+        count += 1
+        text += page_obj.extractText()
+
+      return text
+
+    elif file_name == "quit":
+      sys.exit(0)
+
+    else:
+      print("Please enter a .txt or .pdf file. Or enter quit to quit the program")
 
 def get_string_input():
   text = input("Enter the text you want summarized:\n")
