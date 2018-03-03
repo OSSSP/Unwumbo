@@ -32,11 +32,15 @@ def main():
   words_dict = get_word_dictionary(words)
   sentences = get_sentences(text)
 
-  most_relevant_sentences(words_dict, sentences, no_sentences)
+  summary = most_relevant_sentences(words_dict, sentences, no_sentences)
+  print(summary)
 
-def get_file_input():
-  while(True):
-    file_name = input("Enter the name of the file you want summarized:\n")
+def get_file_input(file_name = None):
+  for i in range(10):
+
+    if file_name == None:
+      file_name = input("Enter the name of the file you want summarized:\n")
+      
     if file_name.endswith(".txt"):
       f = open(file_name, 'r')
       text = f.read()
@@ -63,6 +67,8 @@ def get_file_input():
 
     else:
       print("Please enter a .txt or .pdf file. Or enter quit to quit the program")
+
+  sys.exit(1)
 
 def get_string_input():
   text = input("Enter the text you want summarized:\n")
@@ -125,6 +131,7 @@ def get_sentences(text):
   return sentences
 
 def most_relevant_sentences(words_dict, sentences, no_sentences):
+  summary = ""
   relevant_sentences = [sentences[0]]
   no_sentences -= 1
   sorted_dict = sorted(words_dict, key=words_dict.get, reverse=True)
@@ -137,8 +144,10 @@ def most_relevant_sentences(words_dict, sentences, no_sentences):
 
   for sentence in sentences:
     if sentence in relevant_sentences:
-      print(sentence + '.')
+      summary += sentence + '. '
       relevant_sentences.remove(sentence)
+
+  return summary
 
 if __name__ == "__main__":
   main()
