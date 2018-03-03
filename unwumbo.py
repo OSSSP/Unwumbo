@@ -8,6 +8,8 @@ def main():
   words_dict = get_word_dictionary(words)
   sentences = get_sentences(text)
 
+  most_relevant_sentences(words_dict, sentences, 5)
+
 def get_input():
   file_name = input("Enter the name of the file you want summarized:\n")
   f = open(file_name, 'r')
@@ -58,6 +60,21 @@ def get_sentences(text):
   sentence_enders = re.compile('[.!?][\s]{1,2}(?=[A-Z])')
   sentences = sentence_enders.split(text)
   return sentences
+
+def most_relevant_sentences(words_dict, sentences, no_sentences):
+  relevant_sentences = []
+  sorted_dict = sorted(words_dict, key=words_dict.get, reverse=True)
+  for key in sorted_dict:
+    for sentence in sentences:
+      if key in sentence:
+        if(no_sentences > 0):
+          relevant_sentences.append(sentence)
+          no_sentences -= 1
+
+  for sentence in sentences:
+    if sentence in relevant_sentences:
+      print(sentence + '.')
+      relevant_sentences.remove(sentence)
 
 if __name__ == "__main__":
   main()
