@@ -1,8 +1,30 @@
+import sys
 from string import punctuation
 import re
 
 def main():
-  text = get_input()
+  
+  text = ""
+  try:
+    if sys.argv[1] == '-f' or sys.argv[1] == '--file':
+      text = get_file_input()
+
+    elif sys.argv[1] == 's' or sys.argv[1] == '--string':
+      text = get_string_input()
+
+    else:
+      print("""Please enter a valid command line argument:\n
+        -f or --file for summarizing a file\n
+        -s or --string for summarizing text you will input""")
+      sys.exit(1)
+
+  except IndexError:
+    print("""Please enter a valid command line argument:\n
+      -f or --file for summarizing a file\n
+      -s or --string for summarizing text you will input""")
+    sys.exit(1)
+
+      
   no_sentences = get_no_sentences()
   words = get_words(text)
   words = remove_common_words(words)
@@ -11,10 +33,14 @@ def main():
 
   most_relevant_sentences(words_dict, sentences, no_sentences)
 
-def get_input():
+def get_file_input():
   file_name = input("Enter the name of the file you want summarized:\n")
   f = open(file_name, 'r')
   text = f.read()
+  return text
+
+def get_string_input():
+  text = input("Enter the text you want summarized:\n")
   return text
 
 def get_no_sentences():
