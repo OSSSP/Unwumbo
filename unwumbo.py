@@ -3,18 +3,30 @@ import re
 
 def main():
   text = get_input()
+  no_sentences = get_no_sentences()
   words = get_words(text)
   words = remove_common_words(words)
   words_dict = get_word_dictionary(words)
   sentences = get_sentences(text)
 
-  most_relevant_sentences(words_dict, sentences, 5)
+  most_relevant_sentences(words_dict, sentences, no_sentences)
 
 def get_input():
   file_name = input("Enter the name of the file you want summarized:\n")
   f = open(file_name, 'r')
   text = f.read()
   return text
+
+def get_no_sentences():
+
+  while(True):
+    no_sentences = input("How many sentences will you like to read? ")
+
+    try:
+      no_sentences = int(no_sentences)
+      return no_sentences
+    except ValueError:
+      print("Please enter an integer!")
 
 def get_words(text):
   text_no_punc = ''.join(c for c in text if c not in punctuation)
@@ -62,10 +74,11 @@ def get_sentences(text):
   return sentences
 
 def most_relevant_sentences(words_dict, sentences, no_sentences):
-  relevant_sentences = []
+  relevant_sentences = [sentences[0]]
+  no_sentences -= 1
   sorted_dict = sorted(words_dict, key=words_dict.get, reverse=True)
   for key in sorted_dict:
-    for sentence in sentences:
+    for sentence in sentences[1:]:
       if key in sentence:
         if(no_sentences > 0):
           relevant_sentences.append(sentence)
