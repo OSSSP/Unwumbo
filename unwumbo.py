@@ -9,7 +9,7 @@ def main():
     if sys.argv[1] == '-f' or sys.argv[1] == '--file':
       text = get_file_input()
 
-    elif sys.argv[1] == 's' or sys.argv[1] == '--string':
+    elif sys.argv[1] == '-s' or sys.argv[1] == '--string':
       text = get_string_input()
 
     else:
