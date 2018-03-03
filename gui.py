@@ -7,6 +7,7 @@ def print_summary():
   e.grid_forget()
   text = unwumbo.get_file_input(e.get())
   words = unwumbo.get_words(text)
+  words = unwumbo.remove_common_words(words)
   words_dict = unwumbo.get_word_dictionary(words)
   sentences = unwumbo.get_sentences(text)
 
