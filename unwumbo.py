@@ -36,37 +36,33 @@ def main():
   print(summary)
 
 def get_file_input(file_name = None):
-  for i in range(10):
 
-    if file_name == None:
-      file_name = input("Enter the name of the file you want summarized:\n")
+  if file_name == None:
+    file_name = input("Enter the name of the file you want summarized:\n")
       
-    if file_name.endswith(".txt"):
-      f = open(file_name, 'r')
-      text = f.read()
-      return text
+  if file_name.endswith(".txt"):
+    f = open(file_name, 'r')
+    text = f.read()
+    return text
 
-    elif file_name.endswith(".pdf"):
-      pdf_file_obj = open(file_name, 'rb')
+  elif file_name.endswith(".pdf"):
+    pdf_file_obj = open(file_name, 'rb')
 
-      pdf_reader = PyPDF2.PdfFileReader(pdf_file_obj)
+    pdf_reader = PyPDF2.PdfFileReader(pdf_file_obj)
 
-      num_pages = pdf_reader.numPages
-      count = 0
-      text = ""
+    num_pages = pdf_reader.numPages
+    count = 0
+    text = ""
 
-      while count < num_pages:
-        page_obj = pdf_reader.getPage(count)
-        count += 1
-        text += page_obj.extractText()
+    while count < num_pages:
+      page_obj = pdf_reader.getPage(count)
+      count += 1
+      text += page_obj.extractText()
 
-      return text
+    return text
 
-    elif file_name == "quit":
-      sys.exit(0)
-
-    else:
-      print("Please enter a .txt or .pdf file. Or enter quit to quit the program")
+  else:
+    print("Please enter a .txt or .pdf file.")
 
   sys.exit(1)
 
