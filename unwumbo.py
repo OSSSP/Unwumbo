@@ -127,24 +127,33 @@ def get_sentences(text):
   return sentences
 
 def most_relevant_sentences(words_dict, sentences, no_sentences):
-  summary = ""
-  relevant_sentences = [sentences[0]]
-  no_sentences -= 1
-  sorted_dict = sorted(words_dict, key=words_dict.get, reverse=True)
-  for key in sorted_dict:
-    for sentence in sentences[1:]:
-      if key in sentence:
-        if(no_sentences > 0):
-          relevant_sentences.append(sentence)
-          no_sentences -= 1
+
+  count = no_sentences
+  summary = sentences[0] + '. '
+  count -= 1
+  scores = []
 
   for sentence in sentences:
-    if sentence in relevant_sentences:
-      summary += sentence + '. '
-      relevant_sentences.remove(sentence)
+    words = get_words(sentence)
+    score = 0
+
+    for word in words:
+      if word in words_dict:
+        score += words_dict[word]
+
+    scores.append(score)
+
+  sorted_scores = sorted(scores, reverse = True)
+
+  for i in range(1, len(sentences)):
+    if count <= 0:
+      break
+    if scores[i] in sorted_scores[0:no_sentences]:
+      summary += sentences[i] + '. '
+      count -= 1
 
   return summary
-
+  
 if __name__ == "__main__":
   main()
 
