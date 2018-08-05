@@ -73,7 +73,7 @@ def get_string_input():
 def get_no_sentences():
 
   while(True):
-    no_sentences = input("How many sentences will you like to read? ")
+    no_sentences = input("How many sentences would you like to read? ")
 
     try:
       no_sentences = int(no_sentences)
