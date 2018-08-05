@@ -2,6 +2,7 @@ import sys
 from string import punctuation
 import re
 import PyPDF2
+from nltk import tokenize
 
 def main():
   
@@ -123,14 +124,16 @@ def remove_common_words(words):
   return uncommon_words
 
 def get_sentences(text):
-  sentence_enders = re.compile('[.!?][\s]{1,2}(?=[A-Z])')
-  sentences = sentence_enders.split(text)
+  #sentence_enders = re.compile('[.!?][\s]{1,2}(?=[A-Z])')
+  #sentences = sentence_enders.split(text)
+  sentences = tokenize.sent_tokenize(text)
   return sentences
 
 def most_relevant_sentences(words_dict, sentences, no_sentences):
 
   count = no_sentences
-  summary = sentences[0] + '. '
+  #summary = sentences[0] + '. '
+  summary = sentences[0]
   count -= 1
   scores = []
 
@@ -150,7 +153,8 @@ def most_relevant_sentences(words_dict, sentences, no_sentences):
     if count <= 0:
       break
     if scores[i] in sorted_scores[0:no_sentences]:
-      summary += sentences[i] + '. '
+      #summary += sentences[i] + '. '
+      summary += sentences[i]
       count -= 1
 
   return summary
