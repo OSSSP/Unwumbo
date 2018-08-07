@@ -10,7 +10,7 @@ The program works in the following way:
 
 - All the words in the inputted text are put into a list.
 
-- Common English words (the, of, an, etc.) are removed from the list.
+- Common English words such as articles (the, a, an) and prepositions (of, at) are removed from the list.
 
 - A dictionary is created from the list of words, with each key being a unique word from the list. The value of a key is the number of times that key (word) appears in the list.
 
@@ -21,3 +21,7 @@ The program works in the following way:
   - A sentence is scored by summing the values of each word in the sentence. The values are obtained from the dictionary.
 
 - The most relevant sentences (plus the very first sentence) are returned in chronological order.
+
+## Demo
+
+## Further Reading
