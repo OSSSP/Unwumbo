@@ -1,6 +1,4 @@
 import sys
-from string import punctuation
-import re
 import PyPDF2
 from nltk import tokenize
 
