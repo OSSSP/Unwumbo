@@ -1,4 +1,5 @@
 import sys
+from string import punctuation
 import PyPDF2
 from nltk import tokenize
 
