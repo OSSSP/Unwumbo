@@ -36,4 +36,4 @@ To use Unwumbo via a GUI, open up a terminal and type `python3 gui.py` in the di
 
 ![Gif 2](https://github.com/haseebT/Unwumbo/blob/master/gifs/gui.gif)
 
-## Further Reading
+
