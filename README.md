@@ -26,10 +26,14 @@ The program works in the following way:
 
 #### Command Line
 
-To use Unwumbo from the command line, type `python3 unwumbo.py -f` in the directory where unwumbo.py is located. You will then be prompted to enter the name of the text file you want summarized. Either enter the file's absolute path or its relative path. Finally, enter the number of sentences you would like to read.
+To use Unwumbo from the command line, open up a terminal and type `python3 unwumbo.py -f` in the directory where unwumbo.py is located. You will then be prompted to enter the name of the text file you want summarized. Either enter the file's absolute path or its relative path. Finally, enter the number of sentences you would like to read.
 
 ![Gif 1](https://github.com/haseebT/Unwumbo/blob/master/gifs/cli-text.gif)
 
+#### GUI
 
+To use Unwumbo via a GUI, open up a terminal and type `python3 gui.py` in the directory where gui.py is located. A GUI window will pop up and give you the option to summarize a file, or summarize text inputted via the keyboard. Depending on which option you choose, either enter the file name (absolute or relative path), or enter your own text. The GUI option will always output 5 sentences.
+
+![Gif 2](https://github.com/haseebT/Unwumbo/blob/master/gifs/gui.gif)
 
 ## Further Reading
